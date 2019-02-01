@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from Home.views import *
+from Home.views import lampon, lampoff
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'Home/$', lamp),
+    url(r'Home/on$', lampon),
+    url(r'Home/off$', lampon),
 ]
