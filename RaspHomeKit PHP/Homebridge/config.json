@@ -1,0 +1,31 @@
+{
+    "bridge": {
+        "name": "Homebridge",
+        "username": "CC:22:3D:E3:CE:30",
+        "port": 51826,
+        "pin": "031-45-155"
+    },
+    "description": "configuration file for room D316",
+
+    
+"accessories": [
+        {
+            "accessory": "GPIODevice",
+            "name": "Room Light",
+            "type": "Lightbulb",
+            "inverted": true,
+            "pin": 8
+        },
+        {
+            "accessory": "GPIODevice",
+            "name": "Room Fan",
+            "type": "Switch",
+            "inverted": true,
+            "pin": 9
+        }
+
+    ],
+
+
+    "platforms":[]
+}
