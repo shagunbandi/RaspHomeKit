@@ -1,17 +1,19 @@
-# PIGPIO_ADDR=10.109.2.165 python3 toggly_remote.py
-# GPIOZERO_PIN_FACTORY=pigpio PIGPIO_ADDR=192.168.1.3 python3 toggly_remote.py
+# PIGPIO_ADDR=10.109.2.165 python3 toggle_remote.py
+# GPIOZERO_PIN_FACTORY=pigpio PIGPIO_ADDR=raspberrypi.local python3 toggle_remote.py
 # https://gpiozero.readthedocs.io/en/stable/remote_gpio.html
 
 from gpiozero import PWMLED
 from gpiozero.pins.pigpio import PiGPIOFactory
 from time import sleep
+from signal import pause
 
-factory = PiGPIOFactory(host='raspberrypi.local')
-# factory4 = PiGPIOFactory(host='192.168.1.4')
 
-led_r = PWMLED(17, pin_factory=factory)
-led_g = PWMLED(24, pin_factory=factory)
-led_b = PWMLED(22, pin_factory=factory)
+# factory = PiGPIOFactory(host='raspberrypi.local')
+factory4 = PiGPIOFactory(host='192.168.1.4')
+
+led_r = PWMLED(24, pin_factory=factory)
+led_g = PWMLED(22, pin_factory=factory)
+led_b = PWMLED(17 , pin_factory=factory)
 
 def set_colour(red, green, blue):
  
@@ -31,6 +33,12 @@ def main():
     rx = 64
     ry = 36
     totpixels = rx * ry
+
+    # led_r.pulse()
+    # led_b.pulse()
+    # led_g.pulse()
+
+
 
     # screen scanning loop
     while True:
@@ -59,6 +67,8 @@ def main():
         print ("- Time %2.4f" % (t2-t1), )
 
         time.sleep(1/500)
+    # pause()
+
 
 if __name__ == '__main__':
     main()
