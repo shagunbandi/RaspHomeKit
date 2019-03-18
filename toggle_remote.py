@@ -6,10 +6,14 @@ from gpiozero import PWMLED
 from gpiozero.pins.pigpio import PiGPIOFactory
 from time import sleep
 from signal import pause
+from PIL import ImageGrab
+from PIL import Image
+import time, os, colorsys
+
 
 
 # factory = PiGPIOFactory(host='raspberrypi.local')
-factory4 = PiGPIOFactory(host='192.168.1.4')
+factory = PiGPIOFactory(host='10.109.2.165')
 
 led_r = PWMLED(24, pin_factory=factory)
 led_g = PWMLED(22, pin_factory=factory)
@@ -22,12 +26,6 @@ def set_colour(red, green, blue):
     led_g.value = green/255
 
     print("Changing")
-
-
-
-from PIL import ImageGrab
-from PIL import Image
-import time, os, colorsys
 
 def main():
     rx = 64
@@ -54,9 +52,40 @@ def main():
                 red = red + c[0]
                 green = green + c[1]
                 blue = blue + c[2]
+
         red = red / totpixels
         green = green / totpixels
         blue = blue / totpixels
+
+        # for y in range(0, img.size[1]):
+        #     for x in range(0, int(img.size[0]/4)):
+        #         c = img.getpixel((x,y))
+        #         red = red + c[0]
+        #         green = green + c[1]
+        #         blue = blue + c[2]
+        #     for x in range(int(img.size[0]*3/4), img.size[0]):
+        #         c = img.getpixel((x,y))
+        #         red = red + c[0]
+        #         green = green + c[1]
+        #         blue = blue + c[2]
+
+        # for x in range(0, img.size[0]):
+        #     for y in range(0, int(img.size[1]/4)):
+        #         c = img.getpixel((x,y))
+        #         red = red + c[0]
+        #         green = green + c[1]
+        #         blue = blue + c[2]
+        #     for y in range(int(img.size[1]*3/4), img.size[1]):
+        #         c = img.getpixel((x,y))
+        #         red = red + c[0]
+        #         green = green + c[1]
+        #         blue = blue + c[2]
+
+        # totpixxxies = img.size[1] * img.size[0] / 2 + img.size[0] * img.size[1] / 2
+
+        # red = red / totpixxxies
+        # green = green / totpixxxies
+        # blue = blue / totpixxxies
 
         print ("\rRGB %3d %3d %3d" % (red, green, blue), )
         # print(t1)
