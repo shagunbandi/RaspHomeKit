@@ -1,7 +1,8 @@
 from helper import turn_off, turn_on, blink
+# import threading
 
 
-PLAY_NUM = 3
+PLAY_NUM = 7
 
 BASE_0 = 0.06
 BASE_1 = 0.10
@@ -11,7 +12,10 @@ BASE_4 = 0.3
 
 def play(ampl, RED, GREEN, args=["name", 1]):
     
-    play_num = int(args[1])
+    try:
+        play_num = int(args[1])
+    except:
+        play_num = PLAY_NUM    
 
     if play_num == -1:
         only_red(ampl, RED, GREEN)
@@ -177,7 +181,7 @@ def super_random(ampl, RED, GREEN):
     print("playing on super_random")
     if ampl <= BASE_0:
         turn_on(RED)
-        turn_off(GREEN)
+        turn_on(GREEN)
     if ampl > BASE_0 and ampl <= BASE_1:
         blink(RED)
         turn_on(GREEN)
@@ -193,3 +197,9 @@ def super_random(ampl, RED, GREEN):
     if ampl >= BASE_4:
         blink(RED)
         blink(GREEN)
+
+
+
+
+
+
