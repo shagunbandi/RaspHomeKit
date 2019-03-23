@@ -15,6 +15,7 @@ import time, os, colorsys
 # factory = PiGPIOFactory(host='raspberrypi.local')
 factory = PiGPIOFactory(host='10.109.2.165')
 
+main_bulb = PWMLED(2, pin_factory=factory)
 led_r = PWMLED(24, pin_factory=factory)
 led_g = PWMLED(22, pin_factory=factory)
 led_b = PWMLED(17 , pin_factory=factory)
