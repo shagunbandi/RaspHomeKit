@@ -1,21 +1,16 @@
 from helper import turn_off, turn_on, blink
+from time import sleep
+
 # import threading
-
-
-PLAY_NUM = 7
 
 BASE_0 = 0.06
 BASE_1 = 0.10
 BASE_2 = 0.13
 BASE_3 = 0.18
 BASE_4 = 0.3
+_SLEEP = 1
 
-def play(ampl, RED, GREEN, args=["name", 1]):
-    
-    try:
-        play_num = int(args[1])
-    except:
-        play_num = PLAY_NUM    
+def play(ampl, RED, GREEN, play_num):
 
     if play_num == -1:
         only_red(ampl, RED, GREEN)
@@ -48,11 +43,29 @@ def play(ampl, RED, GREEN, args=["name", 1]):
         super_random(ampl, RED, GREEN)
 
 
+def play_no_music(RED, GREEN, play_num):
+
+    print("Playing No MUsic... ENjoy !!")
+
+
+    if play_num == 101:
+        print("Plaing RGMB")
+        while True:
+            turn_on(RED)
+            sleep(_SLEEP)
+            turn_on(GREEN)
+            sleep(_SLEEP)
+            turn_off(RED)
+            sleep(_SLEEP)
+            turn_off(GREEN)
+            # sleep(_SLEEP)
+
+
 def only_red(ampl, RED, GREEN):
     print("playing only_red")
     turn_off(GREEN)
     turn_on(RED)
-    if ampl >= BASE_1:
+    if ampl >= BASE_0:
         blink(RED, 0.01)
         
 
@@ -60,7 +73,7 @@ def only_green(ampl, RED, GREEN):
     print("playing only_green")
     turn_off(RED)
     turn_on(GREEN)
-    if ampl >= BASE_1:
+    if ampl >= BASE_0:
         blink(GREEN, 0.01)
 
 
@@ -68,7 +81,7 @@ def both_tog(ampl, RED, GREEN):
     print("playing both_tog")
     turn_on(RED)
     turn_on(GREEN)
-    if ampl >= BASE_1:
+    if ampl >= BASE_0:
         blink(GREEN, 0.01)
         blink(RED, 0.01)
 

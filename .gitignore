@@ -1,0 +1,6 @@
+env/
+.DS_Store
+Django/.DS_Store
+RaspHomeKit PHP/.DS_Store
+RoomLightShow/__pycache__/helper.cpython-37.pyc
+RoomLightShow/__pycache__/play_like_this.cpython-37.pyc

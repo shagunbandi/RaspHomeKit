@@ -1,0 +1,7 @@
+cffi==1.15.0
+colorzero==2.0
+gpiozero==1.6.2
+numpy==1.21.5
+pigpio==1.78
+pycparser==2.21
+SoundCard==0.4.1

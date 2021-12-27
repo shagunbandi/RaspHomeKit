@@ -8,7 +8,7 @@ def turn_off(_LED):
     _LED.on()
 
 
-def blink(_LED, _SLEEP=0.05):
+def blink(_LED, _SLEEP=0.01):
     turn_on(_LED)
     sleep(_SLEEP)
     turn_off(_LED)

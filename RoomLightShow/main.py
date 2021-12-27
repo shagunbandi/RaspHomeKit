@@ -7,10 +7,10 @@ import sys
 from gpiozero import LED
 from gpiozero.pins.pigpio import PiGPIOFactory
 import soundcard as sc
-import numpy as np
+# import numpy as np
 import time
 
-from play_like_this import play
+from play_like_this import play, play_no_music
 
 # import matplotlib
 # matplotlib.use('TkAgg')
@@ -19,33 +19,43 @@ from play_like_this import play
 CHANNEL = 1
 SAMPLERATE = 44.1e3
 NUMFRAMES = 44.1e2
-MIC_NUM = 3
+MIC_NUM = 4
 RED_PIN = 3
 GREEN_PIN = 2
+PLAY_NUM = 1
 
 
 def main(RED, GREEN):
 
-    channel = CHANNEL
-    samplerate = SAMPLERATE
-    numframes = NUMFRAMES
+    try:
+        play_num = int(sys.argv[1])
+    except:
+        play_num = PLAY_NUM    
 
-    T = 1.0 / samplerate
-    x = np.linspace(0.0, numframes*T, numframes)
-    xf = np.linspace(0.0, 1.0/(2.0*T), numframes//2)
+    print(play_num)
+    if play_num > 100:
+        play_no_music(RED, GREEN, play_num)
+    else:
+        channel = CHANNEL
+        samplerate = SAMPLERATE
+        numframes = NUMFRAMES
 
-    input = sc.all_microphones()[MIC_NUM]
-    print(input)
+        T = 1.0 / samplerate
+        x = np.linspace(0.0, numframes*T, numframes)
+        xf = np.linspace(0.0, 1.0/(2.0*T), numframes//2)
 
-    with input.recorder(samplerate) as mic:
-        for i in range(200000):
-            y = mic.record(numframes)
-            yf = np.fft.fft(y[:, channel])
-            
-            ampl = 2.0/numframes * np.abs(yf[10])                
-            print(ampl)
+        input = sc.all_microphones()[MIC_NUM]
+        print(input)
 
-            play(ampl, RED, GREEN, sys.argv)
+        with input.recorder(samplerate) as mic:
+            for i in range(200000):
+                y = mic.record(numframes)
+                yf = np.fft.fft(y[:, channel])
+                
+                ampl = 2.0/numframes * np.abs(yf[10])                
+                print(ampl)
+
+                play(ampl, RED, GREEN, play_num)
 
 
 def set_up_lights(RED_PIN=RED_PIN, GREEN_PIN=GREEN_PIN):
