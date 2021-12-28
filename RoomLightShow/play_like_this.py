@@ -10,74 +10,116 @@ BASE_3 = 0.18
 BASE_4 = 0.3
 _SLEEP = 1
 
-def play(ampl, RED, GREEN, play_num):
+
+def play(ampl, RED, GREEN, BLUE, play_num):
 
     if play_num == -1:
-        only_red(ampl, RED, GREEN)
+        only_red(ampl, RED, GREEN, BLUE)
 
     elif play_num == -2:
-        only_green(ampl, RED, GREEN)
+        only_green(ampl, RED, GREEN, BLUE)
 
     elif play_num == -3:
-        both_tog(ampl, RED, GREEN)
+        only_blue(ampl, RED, GREEN, BLUE)
+
+    elif play_num == -4:
+        both_tog(ampl, RED, GREEN, BLUE)
 
     elif play_num == 1:
-        light_rand(ampl, RED, GREEN)
+        light_rand(ampl, RED, GREEN, BLUE)
 
     elif play_num == 2:
-        dark_rand(ampl, RED, GREEN)
+        dark_rand(ampl, RED, GREEN, BLUE)
 
     elif play_num == 3:
-        less_blinks(ampl, RED, GREEN)
+        less_blinks(ampl, RED, GREEN, BLUE)
 
     elif play_num == 4:
-        even_less_blinks(ampl, RED, GREEN)
+        even_less_blinks(ampl, RED, GREEN, BLUE)
 
     elif play_num == 5:
-        even_even_less_blinks(ampl, RED, GREEN)
+        even_even_less_blinks(ampl, RED, GREEN, BLUE)
 
     elif play_num == 6:
-        no_blink(ampl, RED, GREEN)
+        no_blink(ampl, RED, GREEN, BLUE)
 
     elif play_num == 7:
-        super_random(ampl, RED, GREEN)
+        super_random(ampl, RED, GREEN, BLUE)
 
 
-def play_no_music(RED, GREEN, play_num):
+def play_no_music(RED, GREEN, BLUE, play_num):
 
-    print("Playing No MUsic... ENjoy !!")
-
+    print("Playing No Music... ENjoy !!")
 
     if play_num == 101:
-        print("Plaing RGMB")
+        print("Plaing RGB PnC")
+        turn_off(RED)
+        turn_off(BLUE)
+        turn_off(GREEN)
+        sleep(_SLEEP)
+
         while True:
+            # 001
             turn_on(RED)
             sleep(_SLEEP)
+
+            # 011
             turn_on(GREEN)
             sleep(_SLEEP)
+
+            # 010
             turn_off(RED)
             sleep(_SLEEP)
+
+            # 110
+            turn_on(BLUE)
+            sleep(_SLEEP)
+
+            # 111
+            turn_on(RED)
+            sleep(_SLEEP)
+
+            # 101
             turn_off(GREEN)
-            # sleep(_SLEEP)
+            sleep(_SLEEP)
+
+            # 100
+            turn_off(RED)
+            sleep(_SLEEP)
+
+            # 000
+            turn_off(BLUE)
+            sleep(_SLEEP)
 
 
-def only_red(ampl, RED, GREEN):
+def only_red(ampl, RED, GREEN, BLUE):
     print("playing only_red")
+    turn_off(BLUE)
     turn_off(GREEN)
     turn_on(RED)
     if ampl >= BASE_0:
         blink(RED, 0.01)
-        
 
-def only_green(ampl, RED, GREEN):
+
+def only_green(ampl, RED, GREEN, BLUE):
     print("playing only_green")
     turn_off(RED)
+    turn_off(BLUE)
     turn_on(GREEN)
     if ampl >= BASE_0:
         blink(GREEN, 0.01)
 
 
-def both_tog(ampl, RED, GREEN):
+def only_blue(ampl, RED, GREEN, BLUE):
+    print("playing only_green")
+    turn_off(RED)
+    turn_off(GREEN)
+    turn_on(BLUE)
+    if ampl >= BASE_0:
+        blink(GREEN, 0.01)
+
+
+def both_tog(ampl, RED, GREEN, BLUE):
     print("playing both_tog")
     turn_on(RED)
     turn_on(GREEN)
@@ -86,7 +128,7 @@ def both_tog(ampl, RED, GREEN):
         blink(RED, 0.01)
 
 
-def light_rand(ampl, RED, GREEN):
+def light_rand(ampl, RED, GREEN, BLUE):
     print("playing on light_rand")
     if ampl <= 0.06:
         turn_on(RED)
@@ -102,12 +144,12 @@ def light_rand(ampl, RED, GREEN):
         turn_off(GREEN)
 
 
-def dark_rand(ampl, RED, GREEN):
+def dark_rand(ampl, RED, GREEN, BLUE):
     print("playing on dark_rand")
     if ampl <= 0.06:
         turn_off(RED)
         turn_off(GREEN)
-    
+
     if ampl >= 0.03 and ampl < 0.06:
         blink(GREEN)
         turn_on(RED)
@@ -117,7 +159,7 @@ def dark_rand(ampl, RED, GREEN):
         blink(GREEN)
 
 
-def less_blinks(ampl, RED, GREEN):
+def less_blinks(ampl, RED, GREEN, BLUE):
     print("playing on less_blinks")
     if ampl <= BASE_1:
         turn_on(RED)
@@ -136,7 +178,7 @@ def less_blinks(ampl, RED, GREEN):
         blink(GREEN)
 
 
-def even_less_blinks(ampl, RED, GREEN):
+def even_less_blinks(ampl, RED, GREEN, BLUE):
     print("playing on even_less_blinks")
     if ampl <= BASE_2:
         turn_on(RED)
@@ -155,7 +197,7 @@ def even_less_blinks(ampl, RED, GREEN):
         blink(GREEN)
 
 
-def even_even_less_blinks(ampl, RED, GREEN):
+def even_even_less_blinks(ampl, RED, GREEN, BLUE):
     print("playing on even_even_less_blinks")
     if ampl <= BASE_2:
         turn_on(RED)
@@ -174,12 +216,12 @@ def even_even_less_blinks(ampl, RED, GREEN):
         blink(GREEN)
 
 
-
-def no_blink(ampl, RED, GREEN):
+def no_blink(ampl, RED, GREEN, BLUE):
     print("playing on no_blink")
     if ampl <= BASE_0:
         turn_on(RED)
         turn_on(GREEN)
+        turn_on(BLUE)
 
     if ampl >= BASE_0 and ampl < BASE_1:
         turn_on(GREEN)
@@ -190,7 +232,7 @@ def no_blink(ampl, RED, GREEN):
         turn_off(GREEN)
 
 
-def super_random(ampl, RED, GREEN):
+def super_random(ampl, RED, GREEN, BLUE):
     print("playing on super_random")
     if ampl <= BASE_0:
         turn_on(RED)
@@ -198,7 +240,7 @@ def super_random(ampl, RED, GREEN):
     if ampl > BASE_0 and ampl <= BASE_1:
         blink(RED)
         turn_on(GREEN)
-    if ampl > BASE_1 and ampl <=BASE_2:
+    if ampl > BASE_1 and ampl <= BASE_2:
         turn_on(GREEN)
         turn_on(RED)
     if ampl >= BASE_2 and BASE_3:
@@ -210,9 +252,3 @@ def super_random(ampl, RED, GREEN):
     if ampl >= BASE_4:
         blink(RED)
         blink(GREEN)
-
-
-
-
-
-
